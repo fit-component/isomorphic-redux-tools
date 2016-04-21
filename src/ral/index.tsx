@@ -18,6 +18,5 @@ export default async(settings:any) => {
             'bfeip': yog.log.req.headers.bfeip
         }
     }
-    let tmp=await yog.ralP('service', _.defaultsDeep(settings, defaults))
-    return tmp
+    return await yog.ralP('service', _.defaultsDeep(settings, defaults))
 }

@@ -1,5 +1,8 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-/// <reference path="./typings.d.ts" />
+/// <reference path="../../../../typings-module/es6-promise.d.ts" />
+/// <reference path="../../../../typings-module/yog2-kernel.d.ts" />
+/// <reference path="../../../../typings-module/process.d.ts" />
+/// <reference path="../../../../typings-module/redux-immutablejs.d.ts" />
 
 import connect from './connect/index'
 import promiseMiddleware from './promise-middleware/index'
