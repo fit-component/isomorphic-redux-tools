@@ -7,16 +7,14 @@ export interface Option {
     data?:any
 }
 
-export default (basename:string)=> {
-    return (option:Option)=> {
-        if (process.browser) {
-            return axios({
-                url: basename + option.url,
-                method: option.method,
-                data: option.data
-            })
-        } else {
+export default (basename:string)=>(option:Option)=> {
+    if (process.browser) {
+        return axios({
+            url: basename + option.url,
+            method: option.method,
+            data: option.data
+        })
+    } else {
 
-        }
     }
 }
