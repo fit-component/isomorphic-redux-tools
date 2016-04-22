@@ -5,11 +5,8 @@ import {renderToString} from 'react-dom/server'
 import {match, RouterContext} from 'react-router'
 import {Provider} from 'react-redux'
 
-// 获取 html
-const htmlText = fs.readFileSync(path.join(__dirname, '../../client/index.html'), 'utf-8')
-
 // 渲染整个页面
-const renderFullPage = (element, initialState)=> {
+const renderFullPage = (htmlText:string, element:string, initialState:any)=> {
     let content = htmlText
     // 将内容塞到 #react-dom
     content = content.replace(/<div id=\"react-dom\"><\/div>/g, `<div id="react-dom">${element}</div>`)
@@ -19,10 +16,10 @@ const renderFullPage = (element, initialState)=> {
 }
 
 // 后端渲染
-export default (req:any, res:any, routes:ReactRouter.RouteConfig, basename:string, configureStore:any, enable:boolean = true)=> {
+export default (req:any, res:any, routes:ReactRouter.RouteConfig, basename:string, configureStore:any, htmlText:string, enable:boolean = true)=> {
     // 如果不启动后端渲染,直接返回未加工的模板
     if (!enable) {
-        return res.status(200).send(renderFullPage('', {}))
+        return res.status(200).send(renderFullPage(htmlText, '', {}))
     }
 
     match({
@@ -42,7 +39,7 @@ export default (req:any, res:any, routes:ReactRouter.RouteConfig, basename:strin
             const componentHTML = renderToString(InitialView)
             const initialState = store.getState()
             // 将初始状态输出到 html
-            res.status(200).send(renderFullPage(componentHTML, initialState))
+            res.status(200).send(renderFullPage(htmlText, componentHTML, initialState))
         } else {
             res.status(404).send('Not Found')
         }
