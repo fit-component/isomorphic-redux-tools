@@ -51,10 +51,10 @@ export default (initialState?:any, rootReducer?:any) => {
 
     if (module.hot) {
         // 开启 reducer 的 hot-loader
-        module.hot.accept('../reducer', () => {
-            const nextRootReducer = require('../reducer').default
-            store.replaceReducer(nextRootReducer)
-        })
+        // module.hot.accept('../reducer', () => {
+        //     const nextRootReducer = require('../reducer').default
+        //     store.replaceReducer(nextRootReducer)
+        // })
     }
 
     return store
