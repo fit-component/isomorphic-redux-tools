@@ -4,6 +4,7 @@ import * as path from 'path'
 import {renderToString} from 'react-dom/server'
 import {match, RouterContext} from 'react-router'
 import {Provider} from 'react-redux'
+import configureStore from '../store/index'
 
 // 渲染整个页面
 const renderFullPage = (htmlText:string, element:string, initialState:any)=> {
@@ -16,7 +17,7 @@ const renderFullPage = (htmlText:string, element:string, initialState:any)=> {
 }
 
 // 后端渲染
-export default (req:any, res:any, routes:ReactRouter.RouteConfig, basename:string, configureStore:any, htmlText:string, enable:boolean = true)=> {
+export default (req:any, res:any, routes:ReactRouter.RouteConfig, basename:string, rootReducer:any, htmlText:string, enable:boolean = true)=> {
     // 如果不启动后端渲染,直接返回未加工的模板
     if (!enable) {
         return res.status(200).send(renderFullPage(htmlText, '', {}))
@@ -33,7 +34,7 @@ export default (req:any, res:any, routes:ReactRouter.RouteConfig, basename:strin
             res.redirect(302, redirectLocation.pathname + redirectLocation.search)
         } else if (renderProps) {
             // 初始化 redux
-            const store = configureStore()
+            const store = configureStore(null, rootReducer)
             const InitialView = React.createElement(Provider, {store: store}, React.createElement(RouterContext, renderProps))
 
             const componentHTML = renderToString(InitialView)

@@ -8,5 +8,7 @@ import connect from './connect/index'
 import promiseMiddleware from './promise-middleware/index'
 import serverRender from './server-render/index'
 import fetch from './fetch/index'
+import router from './router/index'
+import store from './store/index'
 
-export {connect, promiseMiddleware, serverRender, fetch}
+export {connect, promiseMiddleware, serverRender, fetch, router, store}
