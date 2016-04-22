@@ -6,7 +6,7 @@
 
 import connect from './connect/index'
 import promiseMiddleware from './promise-middleware/index'
-import ral from './ral/index'
 import serverRender from './server-render/index'
+import fetch from './fetch/index'
 
-export {connect, promiseMiddleware, ral, serverRender}
+export {connect, promiseMiddleware, serverRender, fetch}
