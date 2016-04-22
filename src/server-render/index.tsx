@@ -34,7 +34,7 @@ export default (req:any, res:any, routes:ReactRouter.RouteConfig, basename:strin
             res.redirect(302, redirectLocation.pathname + redirectLocation.search)
         } else if (renderProps) {
             // 初始化 redux
-            const store = configureStore(null, rootReducer)
+            const store = configureStore({}, rootReducer)
             const InitialView = React.createElement(Provider, {store: store}, React.createElement(RouterContext, renderProps))
 
             const componentHTML = renderToString(InitialView)
