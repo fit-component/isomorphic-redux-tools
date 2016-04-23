@@ -9,8 +9,8 @@ export interface Option {
     data?:any
 }
 
-export const setBasename = (basename:string)=> {
-    basename = basename
+export const setBasename = (_basename:string)=> {
+    basename = _basename
 }
 
 export default (option:Option)=> {
