@@ -9,8 +9,7 @@ export interface Option {
 
 export default (basename:string)=>(option:Option)=> {
     if (process.browser) {
-        return axios({
-            url: basename + option.url,
+        return axios.post(basename + option.url, {
             method: option.method,
             data: option.data
         })
