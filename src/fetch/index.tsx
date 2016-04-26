@@ -5,6 +5,7 @@ export interface Option {
     url:string
     method:string
     data?:any
+    service?:string
 }
 
 export default (basename:string)=>(option:Option)=> {

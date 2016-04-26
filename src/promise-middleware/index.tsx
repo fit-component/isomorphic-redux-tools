@@ -1,17 +1,19 @@
-const getRest:any = (action:any)=> {
+import * as process from 'process'
+
+const getRest:any = (action:any) => {
     let rest:any = {}
-    let restKeys:any = Object.keys(action).filter((key:string)=> {
+    let restKeys:any = Object.keys(action).filter((key:string) => {
         return key !== 'promise' && key !== 'type'
     })
-    restKeys.forEach((key:string)=> {
+    restKeys.forEach((key:string) => {
         rest[key] = action[key]
     })
     return rest
 }
 
-const extendRest:any = (rest:any, extend:any)=> {
+const extendRest:any = (rest:any, extend:any) => {
     let all:any = rest
-    Object.keys(extend).forEach((extendkey:string)=> {
+    Object.keys(extend).forEach((extendkey:string) => {
         all[extendkey] = extend[extendkey]
     })
     return all
@@ -32,8 +34,14 @@ export default (store:any) => (next:any) => (action:any) => {
     }))
 
     return promise.then((req:any) => {
+        let data = {}
+        if (process.browser) {
+            data = req.data
+        } else {
+            data = req
+        }
         next(extendRest(rest, {
-            req, type: SUCCESS
+            data: data, type: SUCCESS
         }))
         return true
     }).catch((error:any) => {
