@@ -19,13 +19,25 @@ export const setServerRender = (render)=> {
     serverRender = render
 }
 
-export default (option:Option)=> {
+export default (action,option:Option)=> {
+    let promise:any = null
     if (process.browser) {
-        return axios.post(basename + option.url, {
+        promise = axios({
+            url: basename + option.url,
             method: option.method,
             data: option.data
         })
     } else {
-
+        if (serverRender) {
+            // promise = Fetch.ServerRender({
+            //     url: basename + option.url,
+            //     data: option.data,
+            //     service: option.service
+            // }, action)
+        }
+    }
+    return {
+        type: action,
+        promise: promise
     }
 }
