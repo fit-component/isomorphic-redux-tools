@@ -3,6 +3,7 @@ export default class ServerRequestHelper {
 
     public Request = (option, type) => {
         // option.url
+        console.log('request', option.url, type)
         let action = {
             type: type,
             promise: null

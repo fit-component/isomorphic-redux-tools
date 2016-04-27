@@ -29,7 +29,6 @@ export default (option:Option)=> {
             data: option.data
         })
     } else {
-        console.log(serverRender)
         if (serverRender) {
             promise = serverRender({
                 url: option.url,
