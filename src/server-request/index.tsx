@@ -2,7 +2,7 @@ export default class ServerRequestHelper {
     private actions = []
 
     public Request = (option, type) => {
-        // option.originUrl
+        // option.url
         let action = {
             type: type,
             promise: null

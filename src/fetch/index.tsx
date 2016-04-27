@@ -29,12 +29,12 @@ export default (option:Option)=> {
             data: option.data
         })
     } else {
+        console.log(serverRender)
         if (serverRender) {
-            // promise = Fetch.ServerRender({
-            //     url: basename + option.url,
-            //     data: option.data,
-            //     service: option.service
-            // }, action)
+            promise = serverRender({
+                url: option.url,
+                data: option.data
+            }, option.type)
         }
     }
     return {
