@@ -3,7 +3,7 @@ import {Router, useRouterHistory} from 'react-router'
 import {createHistory} from 'history'
 import {syncHistoryWithStore} from 'react-router-redux'
 import {Provider} from 'react-redux'
-import configureStore from '../store/index'
+import configureStore from '../store'
 
 // 定义ts丢失的属性
 interface MyWindow extends Window {

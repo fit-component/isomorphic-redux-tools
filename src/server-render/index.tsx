@@ -5,7 +5,7 @@ import {renderToString} from 'react-dom/server'
 import {match, RouterContext} from 'react-router'
 import {Provider} from 'react-redux'
 import ServerRequestHelper from '../server-request'
-import configureStore from '../store/index'
+import configureStore from '../store'
 
 interface YogInterface {
     log:any
@@ -43,7 +43,7 @@ export default(req:any, res:any, routes:ReactRouter.RouteConfig, basename:string
             const serverRequestHelper = new ServerRequestHelper()
             renderProps.params.SERVERRENDER = serverRequestHelper.Request
             // 初始化 redux
-            const store = configureStore()
+            const store = configureStore({}, rootReducer)
             const InitialView = React.createElement(Provider, {store: store}, React.createElement(RouterContext, renderProps))
 
             try {
