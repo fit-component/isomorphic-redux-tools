@@ -62,8 +62,8 @@ export default(option:Option)=> {
 
                 // 拿到这些请求的action
                 const actions = serverRequestHelper.getActions()
-                Promise.all(actions.map(action=> {
-                    console.log(555,action)
+                Promise.all(actions.map((action:any)=> {
+                    console.log(555, action)
                     return store.dispatch(action)
                 })).then(()=> {
                     console.log(123)

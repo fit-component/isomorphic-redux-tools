@@ -7,7 +7,7 @@ export default class ServerRequestHelper {
     }
 
     // 只在后端执行
-    public Request = (option, type) => {
+    public Request = (option:any, type:string) => {
         let action = {
             type: type,
             promise: this.service.get(option.url).value
