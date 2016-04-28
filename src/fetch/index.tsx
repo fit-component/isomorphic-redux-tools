@@ -28,6 +28,7 @@ export default (option:Option)=> {
             method: option.method,
             data: option.data
         })
+        console.log('前端', promise)
     } else {
         if (serverRender) {
             promise = serverRender({
@@ -35,6 +36,7 @@ export default (option:Option)=> {
                 data: option.data
             }, option.type)
         }
+        console.log('后端', promise)
     }
     return {
         type: option.type,
