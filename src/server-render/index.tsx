@@ -56,19 +56,17 @@ export default(option:Option)=> {
             // 初始化 redux
             const store = configureStore({}, option.rootReducer)
             const InitialView = React.createElement(Provider, {store: store}, React.createElement(RouterContext, renderProps))
-
             try {
-                console.log('初始化')
                 // 初次渲染触发所有需要的网络请求
                 renderToString(InitialView)
-                console.log('初始化完成')
 
                 // 拿到这些请求的action
                 const actions = serverRequestHelper.getActions()
-                console.log('拿到action', actions)
                 Promise.all(actions.map(action=> {
+                    console.log(555,action)
                     return store.dispatch(action)
                 })).then(()=> {
+                    console.log(123)
                     const componentHTML = renderToString(InitialView)
                     const initialState = store.getState()
                     // 将初始状态输出到 html
