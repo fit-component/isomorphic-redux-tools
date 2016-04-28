@@ -23,27 +23,38 @@ const renderFullPage = (htmlText:string, element:string, initialState:any)=> {
     return content
 }
 
+export interface Option {
+    req:any
+    res:any
+    routes:ReactRouter.RouteConfig
+    basename:string
+    rootReducer:any
+    htmlText:string
+    service:any
+    enableServerRender:boolean
+}
+
 // 后端渲染
-export default(req:any, res:any, routes:ReactRouter.RouteConfig, basename:string, rootReducer:any, htmlText:string, enable:boolean = true)=> {
+export default(option:Option)=> {
     // 如果不启动后端渲染,直接返回未加工的模板
-    if (!enable) {
-        return res.status(200).send(renderFullPage(htmlText, '', {}))
+    if (!option.enableServerRender) {
+        return option.res.status(200).send(renderFullPage(option.htmlText, '', {}))
     }
 
     match({
-        routes: routes,
-        location: req.url,
-        basename: basename
+        routes: option.routes,
+        location: option.req.url,
+        basename: option.basename
     }, (error:any, redirectLocation:any, renderProps:any) => {
         if (error) {
-            res.status(500).send(error.message)
+            option.res.status(500).send(error.message)
         } else if (redirectLocation) {
-            res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+            option.res.redirect(302, redirectLocation.pathname + redirectLocation.search)
         } else if (renderProps) {
-            const serverRequestHelper = new ServerRequestHelper()
+            const serverRequestHelper = new ServerRequestHelper(option.service)
             renderProps.params.SERVERRENDER = serverRequestHelper.Request
             // 初始化 redux
-            const store = configureStore({}, rootReducer)
+            const store = configureStore({}, option.rootReducer)
             const InitialView = React.createElement(Provider, {store: store}, React.createElement(RouterContext, renderProps))
 
             try {
@@ -58,14 +69,14 @@ export default(req:any, res:any, routes:ReactRouter.RouteConfig, basename:string
                     const componentHTML = renderToString(InitialView)
                     const initialState = store.getState()
                     // 将初始状态输出到 html
-                    res.status(200).send(renderFullPage(htmlText, componentHTML, initialState))
+                    option.res.status(200).send(renderFullPage(option.htmlText, componentHTML, initialState))
                 })
             } catch (err) {
                 yog.log.fatal(err)
-                res.status(200).send(renderFullPage(htmlText, '', {err: 'Server Render Error'}))
+                option.res.status(200).send(renderFullPage(option.htmlText, '', {err: 'Server Render Error'}))
             }
         } else {
-            res.status(404).send('Not Found')
+            option.res.status(404).send('Not Found')
         }
     })
 }

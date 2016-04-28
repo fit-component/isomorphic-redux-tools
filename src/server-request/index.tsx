@@ -1,12 +1,16 @@
 export default class ServerRequestHelper {
-    private actions = []
+    private actions:any = []
+    private service:any
 
+    constructor(service) {
+        this.service = service
+    }
+
+    // 只在后端执行
     public Request = (option, type) => {
-        // option.url
-        console.log('request', option.url, type)
         let action = {
             type: type,
-            promise: null
+            promise: this.service.getService(option.url)
         }
         this.actions.push(action)
     }
