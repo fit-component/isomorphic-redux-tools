@@ -31,7 +31,7 @@ export interface Option {
     rootReducer:any
     htmlText:string
     service:any
-    enableServerRender:boolean
+    enableServerRender?:boolean
 }
 
 // 后端渲染
