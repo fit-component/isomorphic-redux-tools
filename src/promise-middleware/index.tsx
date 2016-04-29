@@ -20,6 +20,7 @@ const extendRest:any = (rest:any, extend:any) => {
 }
 
 export default (store:any) => (next:any) => (action:any) => {
+    console.log(action)
     const {promise, type} = action
     const rest:any = getRest(action)
 
