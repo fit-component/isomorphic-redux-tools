@@ -1,6 +1,6 @@
 {
   "name": "fit-isomorphic-redux-tools",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "description": "同构",
   "main": "lib/index.js",
   "scripts": {

@@ -63,7 +63,6 @@ export default(option:Option)=> {
                 // 拿到这些请求的action
                 const actions = serverRequestHelper.getActions()
                 Promise.all(actions.map((action:any)=> {
-                    console.log(555, store.dispatch(action))
                     return store.dispatch(action)
                 })).then(()=> {
                     const componentHTML = renderToString(InitialView)
@@ -72,8 +71,9 @@ export default(option:Option)=> {
                     option.res.status(200).send(renderFullPage(option.htmlText, componentHTML, initialState))
                 })
             } catch (err) {
+                console.log('Server Render Error', err)
                 yog.log.fatal(err)
-                option.res.status(200).send(renderFullPage(option.htmlText, '', {err: 'Server Render Error'}))
+                option.res.status(404).send('Server Render Error')
             }
         } else {
             option.res.status(404).send('Not Found')
