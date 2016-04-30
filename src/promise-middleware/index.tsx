@@ -34,7 +34,8 @@ export default (store:any) => (next:any) => (action:any) => {
         // 符合规范,但不是 promise
         // action:请求成功
         return next(extendRest(rest, {
-            type: SUCCESS
+            type: SUCCESS,
+            data: promise()
         }))
     } else {
         // action:准备发送请求
