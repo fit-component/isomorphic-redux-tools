@@ -4,7 +4,6 @@ import * as axios from 'axios'
 export interface Option {
     type:string
     url:string
-    method:string
     data?:any
     service?:string
 }
@@ -25,7 +24,7 @@ export default (option:Option)=> {
     if (process.browser) {
         promise = axios({
             url: basename + option.url,
-            method: option.method,
+            method: 'get',
             data: option.data
         })
     } else {
