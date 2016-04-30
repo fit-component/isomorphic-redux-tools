@@ -1,11 +1,13 @@
 import * as process from 'process'
 import * as axios from 'axios'
+import * as _ from 'lodash'
 
 export interface Option {
     type:string
     url:string
     method:string
     data?:any
+    params?:any
     service?:string
 }
 
@@ -26,13 +28,15 @@ export default (option:Option)=> {
         promise = axios({
             url: basename + option.url,
             method: option.method,
+            params: option.params,
             data: option.data
         })
     } else {
         if (serverRender) {
+            // 服务端接收参数是 params 和 data 的聚合
             promise = serverRender({
                 url: option.url,
-                data: option.data
+                data: _.assign(option.params, option.data)
             }, option.type)
         }
     }
