@@ -53,7 +53,6 @@ export default(option:Option)=> {
         } else if (renderProps) {
             const serverRequestHelper = new ServerRequestHelper(option.service)
             renderProps.params.SERVERRENDER = serverRequestHelper.Request
-            renderProps.params.SERVICE = option.service
             // 初始化 redux
             const store = configureStore({}, option.rootReducer)
             const InitialView = React.createElement(Provider, {store: store}, React.createElement(RouterContext, renderProps))
