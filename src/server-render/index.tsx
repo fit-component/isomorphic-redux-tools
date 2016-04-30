@@ -7,6 +7,7 @@ import {Provider} from 'react-redux'
 import ServerRequestHelper from '../server-request'
 import {setServerRender} from '../fetch'
 import configureStore from '../store'
+import service from '../service'
 
 interface YogInterface {
     log:any
@@ -31,7 +32,6 @@ export interface Option {
     basename:string
     rootReducer:any
     htmlText:string
-    service:any
     enableServerRender?:boolean
 }
 
@@ -52,7 +52,7 @@ export default(option:Option)=> {
         } else if (redirectLocation) {
             option.res.redirect(302, redirectLocation.pathname + redirectLocation.search)
         } else if (renderProps) {
-            const serverRequestHelper = new ServerRequestHelper(option.service)
+            const serverRequestHelper = new ServerRequestHelper(service)
 
             // 初始化 fetch
             setServerRender(serverRequestHelper.Request as Function)
