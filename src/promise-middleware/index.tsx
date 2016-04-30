@@ -51,7 +51,6 @@ export default (store:any) => (next:any) => (action:any) => {
         let result = promise(action.data)
         if (typeof result.then === 'function') {
             return result.then((req:any) => {
-                console.log('后端异步请求', result)
                 next(extendRest(rest, {
                     data: req, type: SUCCESS
                 }))
@@ -64,7 +63,6 @@ export default (store:any) => (next:any) => (action:any) => {
                 return false
             })
         } else {
-            console.log('后端同步请求', result)
             return next(extendRest(rest, {
                 type: SUCCESS,
                 data: result
