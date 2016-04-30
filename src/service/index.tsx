@@ -1,3 +1,4 @@
+// @babel ignore
 // 映射 map 表
 const services = new Map()
 export default services
