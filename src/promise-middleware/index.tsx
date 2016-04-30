@@ -71,41 +71,4 @@ export default (store:any) => (next:any) => (action:any) => {
             }))
         }
     }
-
-    // if (typeof promise.then !== 'function') {
-    //     // 符合规范,但不是 promise
-    //     // action:请求成功
-    //     console.log('后端请求结果', promise(action.data))
-    //     return next(extendRest(rest, {
-    //         type: SUCCESS,
-    //         data: promise(action.data)
-    //     }))
-    // } else {
-    //     // action:准备发送请求
-    //     next(extendRest(rest, {
-    //         type: REQUEST
-    //     }))
-    //
-    //     return promise.then((req:any) => {
-    //         console.log('前端请求,是否是前端环境', process.browser, '结果', req)
-    //         let data = {}
-    //         if (process.browser) {
-    //             data = req.data
-    //         } else {
-    //             data = req
-    //         }
-    //         // action:请求成功
-    //         next(extendRest(rest, {
-    //             data: data, type: SUCCESS
-    //         }))
-    //         return true
-    //     }).catch((error:any) => {
-    //         // action:请求失败
-    //         next(extendRest(rest, {
-    //             error, type: FAILURE
-    //         }))
-    //         console.log('PromiseMiddleware error:', error)
-    //         return false
-    //     })
-    // }
 }

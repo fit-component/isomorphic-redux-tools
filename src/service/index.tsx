@@ -13,14 +13,14 @@ export const routerDecorator = (url:string, method:string) =>(target:any, key:st
 export const initService = (router:any)=> {
     for (let key of services.keys()) {
         const target = services.get(key)
-        router[target.method](key, (req:any, res:any)=> {
+        router[target.method](key, async(req:any, res:any)=> {
             let params:any = {}
             if (target.method === 'get') {
                 params = req.query
             } else {
                 params = req.body
             }
-            const result = target.value(params)
+            const result = await target.value(params)
             res.json(result)
         })
     }
