@@ -20,11 +20,16 @@ const extendRest:any = (rest:any, extend:any) => {
 }
 
 export default (store:any) => (next:any) => (action:any) => {
-    console.log(action)
     const {promise, type} = action
     const rest:any = getRest(action)
 
+    // 不符合约定 promise 规范
     if (!promise) return next(action)
+
+    // 符合规范,但不是 promise
+    if (typeof promise.then !== 'function') {
+        return next(action)
+    }
 
     const REQUEST = type + '_REQUEST'
     const SUCCESS = type + '_SUCCESS'
@@ -33,7 +38,7 @@ export default (store:any) => (next:any) => (action:any) => {
     next(extendRest(rest, {
         type: REQUEST
     }))
-
+    
     return promise.then((req:any) => {
         let data = {}
         if (process.browser) {
