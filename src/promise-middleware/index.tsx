@@ -48,11 +48,11 @@ export default (store:any) => (next:any) => (action:any) => {
             return false
         })
     } else {
-        let result = promise(action.data)
+        let result = promise(action.data, action.req)
         if (typeof result.then === 'function') {
-            return result.then((req:any) => {
+            return result.then((data:any) => {
                 next(extendRest(rest, {
-                    data: req, type: SUCCESS
+                    data: data, type: SUCCESS
                 }))
                 return true
             }).catch((error:any) => {

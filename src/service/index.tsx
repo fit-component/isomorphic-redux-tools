@@ -21,7 +21,7 @@ export const initService = (router:any)=> {
             } else {
                 params = req.body
             }
-            const result = await target.value(params)
+            const result = await target.value(params, req)
             res.json(result)
         })
     }

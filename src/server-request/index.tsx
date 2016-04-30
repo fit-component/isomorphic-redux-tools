@@ -1,9 +1,11 @@
 export default class ServerRequestHelper {
     private actions:any = []
     private service:any
+    private req:any
 
-    constructor(service:any) {
+    constructor(service:any, req:any) {
         this.service = service
+        this.req = req
     }
 
     // 只在后端执行
@@ -11,6 +13,7 @@ export default class ServerRequestHelper {
         let action = {
             type: type,
             data: option.data,
+            req: this.req,
             promise: this.service.get(option.url).value
         }
         this.actions.push(action)

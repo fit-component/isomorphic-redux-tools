@@ -52,7 +52,7 @@ export default(option:Option)=> {
         } else if (redirectLocation) {
             option.res.redirect(302, redirectLocation.pathname + redirectLocation.search)
         } else if (renderProps) {
-            const serverRequestHelper = new ServerRequestHelper(service)
+            const serverRequestHelper = new ServerRequestHelper(service, option.req)
 
             // 初始化 fetch
             setServerRender(serverRequestHelper.Request as Function)
