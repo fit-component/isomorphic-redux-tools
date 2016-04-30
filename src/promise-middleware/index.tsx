@@ -33,6 +33,7 @@ export default (store:any) => (next:any) => (action:any) => {
     if (typeof promise.then !== 'function') {
         // 符合规范,但不是 promise
         // action:请求成功
+        console.log('后端请求结果', promise(action.data))
         return next(extendRest(rest, {
             type: SUCCESS,
             data: promise(action.data)
@@ -44,6 +45,7 @@ export default (store:any) => (next:any) => (action:any) => {
         }))
 
         return promise.then((req:any) => {
+            console.log('前端请求,是否是前端环境', process.browser, '结果', req)
             let data = {}
             if (process.browser) {
                 data = req.data
