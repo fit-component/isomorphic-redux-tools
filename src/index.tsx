@@ -4,11 +4,11 @@
 /// <reference path="../../../../typings-module/process.d.ts" />
 /// <reference path="../../../../typings-module/redux-immutablejs.d.ts" />
 
-import connect from './connect/index'
-import promiseMiddleware from './promise-middleware/index'
-import serverRender from './server-render/index'
-import fetch from './fetch/index'
-import router from './router/index'
-import store from './store/index'
+import connect from './connect'
+import promiseMiddleware from './promise-middleware'
+import serverRender from './server-render'
+import fetch from './fetch'
+import router from './router'
+import store from './store'
 
 export {connect, promiseMiddleware, serverRender, fetch, router, store}
