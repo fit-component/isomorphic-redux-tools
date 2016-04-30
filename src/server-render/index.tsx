@@ -5,6 +5,7 @@ import {renderToString} from 'react-dom/server'
 import {match, RouterContext} from 'react-router'
 import {Provider} from 'react-redux'
 import ServerRequestHelper from '../server-request'
+import {setBasename, setServerRender} from '../fetch'
 import configureStore from '../store'
 
 interface YogInterface {
@@ -52,7 +53,11 @@ export default(option:Option)=> {
             option.res.redirect(302, redirectLocation.pathname + redirectLocation.search)
         } else if (renderProps) {
             const serverRequestHelper = new ServerRequestHelper(option.service)
-            renderProps.params.SERVERRENDER = serverRequestHelper.Request
+
+            // 初始化 fetch
+            setBasename(option.basename)
+            setServerRender(serverRequestHelper.Request as Function)
+
             // 初始化 redux
             const store = configureStore({}, option.rootReducer)
             const InitialView = React.createElement(Provider, {store: store}, React.createElement(RouterContext, renderProps))
