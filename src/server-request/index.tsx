@@ -10,6 +10,7 @@ export default class ServerRequestHelper {
     public Request = (option:any, type:string) => {
         let action = {
             type: type,
+            data: option.data,
             promise: this.service.get(option.url).value
         }
         this.actions.push(action)
