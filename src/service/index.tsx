@@ -10,7 +10,7 @@ export const routerDecorator = (url:string, method:string) =>(target:any, key:st
     return descriptor
 }
 
-export const init = (router:any)=> {
+export const initService = (router:any)=> {
     for (let key of services.keys()) {
         const target = services.get(key)
         router[target.method](key, (req:any, res:any)=> {
