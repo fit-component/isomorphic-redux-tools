@@ -5,7 +5,7 @@ import {renderToString} from 'react-dom/server'
 import {match, RouterContext} from 'react-router'
 import {Provider} from 'react-redux'
 import ServerRequestHelper from '../server-request'
-import {setBasename, setServerRender} from '../fetch'
+import {setServerRender} from '../fetch'
 import configureStore from '../store'
 
 interface YogInterface {
@@ -55,7 +55,6 @@ export default(option:Option)=> {
             const serverRequestHelper = new ServerRequestHelper(option.service)
 
             // 初始化 fetch
-            setBasename(option.basename)
             setServerRender(serverRequestHelper.Request as Function)
 
             // 初始化 redux
