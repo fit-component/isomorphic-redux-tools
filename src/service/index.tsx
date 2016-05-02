@@ -1,5 +1,7 @@
 // @babel ignore
 // 映射 map 表
+import * as _ from 'lodash'
+
 const services = new Map()
 export default services
 
@@ -19,7 +21,7 @@ export const initService = (router:any)=> {
             if (target.method === 'get') {
                 params = req.query
             } else {
-                params = req.body
+                params =  _.assign(req.body || {}, req.query || {})
             }
             const result = await target.value(params, req)
             res.json(result)

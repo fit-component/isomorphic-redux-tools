@@ -48,7 +48,7 @@ export default (store:any) => (next:any) => (action:any) => {
             return false
         })
     } else {
-        let result = promise(action.data, action.req)
+        const result = promise(action.data, action.req)
         if (typeof result.then === 'function') {
             return result.then((data:any) => {
                 next(extendRest(rest, {
