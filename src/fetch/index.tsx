@@ -36,7 +36,7 @@ export default (option:Option)=> {
             // 服务端接收参数是 params 和 data 的聚合
             promise = serverRender({
                 url: option.url,
-                data: _.assign(option.params, option.data)
+                data: _.assign(option.params || {}, option.data || {})
             }, option.type)
         }
     }
