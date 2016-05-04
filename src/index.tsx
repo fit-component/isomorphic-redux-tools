@@ -10,6 +10,6 @@ import serverRender from './server-render'
 import fetch from './fetch'
 import router from './router'
 import store from './store'
-import {default as services, initService, routerDecorator} from './service'
+import * as service from './service'
 
-export {connect, promiseMiddleware, serverRender, fetch, router, store, services, initService, routerDecorator}
+export {connect, promiseMiddleware, serverRender, fetch, router, store, service}
