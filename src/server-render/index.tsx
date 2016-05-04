@@ -75,9 +75,7 @@ export default(option:Option)=> {
                     option.res.status(200).send(renderFullPage(option.htmlText, componentHTML, initialState))
                 })
             } catch (err) {
-                console.log('Server Render Error', err)
-                yog.log.fatal(err)
-                option.res.status(404).send('Server Render Error')
+                option.res.status(200).send(renderFullPage(option.htmlText, `Server Render Error: ${err.toString()}`, {}))
             }
         } else {
             option.res.status(404).send('Not Found')
