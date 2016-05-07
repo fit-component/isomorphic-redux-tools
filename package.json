@@ -1,6 +1,6 @@
 {
   "name": "fit-isomorphic-redux-tools",
-  "version": "0.0.82",
+  "version": "0.0.83",
   "description": "同构",
   "main": "lib/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://gitlab.baidu.com/tb-component/badge.git"
+    "url": "http://gitlab.baidu.com/tb-component/isomorphic-redux-tools.git"
   },
   "keywords": [
     "react",
