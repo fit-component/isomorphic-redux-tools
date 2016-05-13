@@ -3,27 +3,32 @@ import * as axios from 'axios'
 import * as _ from 'lodash'
 
 export interface Option {
-    type:string
-    url:string
-    method:string
-    data?:any
-    params?:any
-    service?:string
+    type: string
+    url?: string
+    method: string
+    data?: any
+    params?: any
+    service?: string
 }
 
-let basename:string = ''
-let serverRender:Function = null
+let basename: string = ''
+let serverRender: Function = null
 
-export const setBasename = (name:string)=> {
+export const setBasename = (name: string)=> {
     basename = name
 }
 
-export const setServerRender = (render:any)=> {
+export const setServerRender = (render: any)=> {
     serverRender = render
 }
 
-export default (option:Option)=> {
-    let promise:any = null
+export default (option: Option)=> {
+    // 如果不设置 url 参数,默认使用 action 作为 url 地址
+    if (!option.url) {
+        option.url = option.type
+    }
+
+    let promise: any = null
     if (process.browser) {
         promise = axios({
             url: basename + option.url,
