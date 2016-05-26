@@ -1,6 +1,6 @@
 {
   "name": "fit-isomorphic-redux-tools",
-  "version": "0.0.84",
+  "version": "0.0.85",
   "description": "同构",
   "main": "lib/index.js",
   "scripts": {
@@ -27,6 +27,7 @@
     "history": "^2.0.2",
     "react-router-redux": "^4.0.2",
     "react-dom": "^15.0.1",
-    "redux-thunk": "^2.0.1"
+    "redux-thunk": "^2.0.1",
+    "typings": "lib/index.d.ts"
   }
 }
