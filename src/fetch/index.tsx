@@ -1,3 +1,5 @@
+/// <reference path="../../../../../typings-module/process.d.ts" />
+
 import * as process from 'process'
 import * as axios from 'axios'
 import * as _ from 'lodash'

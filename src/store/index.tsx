@@ -1,3 +1,5 @@
+/// <reference path="../../../../../typings-module/process.d.ts" />
+
 import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 import * as process from 'process'

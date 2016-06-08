@@ -1,3 +1,5 @@
+/// <reference path="../../../../../typings-module/process.d.ts" />
+
 import * as process from 'process'
 
 const getRest:any = (action:any) => {
