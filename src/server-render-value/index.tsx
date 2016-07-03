@@ -62,6 +62,10 @@ const getMatch = (option: Option)=> {
                 // 初始化 redux
                 const store = configureStore({}, option.rootReducer)
                 const InitialView = React.createElement(Provider, {store: store}, React.createElement(RouterContext, renderProps))
+
+                // 找到最深层组件的 title
+                const title = renderProps.components[renderProps.components.length-1].title
+
                 try {
                     // 初次渲染触发所有需要的网络请求
                     renderToString(InitialView)
@@ -76,13 +80,13 @@ const getMatch = (option: Option)=> {
                         // 将初始状态输出到 html
                         resolve({
                             status: 200,
-                            result: renderFullPage(option.htmlText, componentHTML, initialState, '')
+                            result: renderFullPage(option.htmlText, componentHTML, initialState, title)
                         })
                     })
                 } catch (err) {
                     resolve({
                         status: 200,
-                        result: renderFullPage(option.htmlText, `Server Render Error: ${err.toString()}`, {}, '')
+                        result: renderFullPage(option.htmlText, `Server Render Error: ${err.toString()}`, {}, title)
                     })
                 }
             } else {
