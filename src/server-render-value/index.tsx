@@ -12,12 +12,15 @@ import configureStore from '../store'
 import service from '../service'
 
 // 渲染整个页面
-const renderFullPage = (htmlText: string, element: string, initialState: any)=> {
+const renderFullPage = (htmlText: string, element: string, initialState: any, initialTitle:string)=> {
     let content = htmlText
     // 将内容塞到 #react-dom
     content = content.replace(/<div id=\"react-dom\"><\/div>/g, `<div id="react-dom">${element}</div>`)
-    // 设置初始状态
+    // 设置 Redux 初始状态
     content = content.replace(/__serverData\((\'|\")__INITIAL_STATE__(\'|\")\)/g, JSON.stringify(initialState))
+    // 设置 title
+    content = content.replace(/__serverData\((\'|\")__INITIAL_TITLE__(\'|\")\)/g, initialTitle)
+
     return content
 }
 
@@ -73,13 +76,13 @@ const getMatch = (option: Option)=> {
                         // 将初始状态输出到 html
                         resolve({
                             status: 200,
-                            result: renderFullPage(option.htmlText, componentHTML, initialState)
+                            result: renderFullPage(option.htmlText, componentHTML, initialState, '')
                         })
                     })
                 } catch (err) {
                     resolve({
                         status: 200,
-                        result: renderFullPage(option.htmlText, `Server Render Error: ${err.toString()}`, {})
+                        result: renderFullPage(option.htmlText, `Server Render Error: ${err.toString()}`, {}, '')
                     })
                 }
             } else {
@@ -98,7 +101,7 @@ export default async(option: Option)=> {
     if (!option.enableServerRender) {
         return {
             status: 200,
-            result: renderFullPage(option.htmlText, '', {})
+            result: renderFullPage(option.htmlText, '', {}, '')
         }
     }
     return await getMatch(option)
