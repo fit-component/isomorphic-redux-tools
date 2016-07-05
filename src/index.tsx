@@ -1,4 +1,5 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
+/// <reference path="../../../../typings-module/process.d.ts" />
 
 import connect from './connect'
 import promiseMiddleware from './promise-middleware'
